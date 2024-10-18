@@ -1,13 +1,10 @@
-MainMenu{
+#MainMenu{
     visibility: hidden;
 }
 header{
     visibility: hidden;
 }
-#id{
-    padding: 100px;
-    background: blue;
-}
+
 .bok{
     width: 104px;
     height: 5px;

@@ -1,3 +1,6 @@
-streamlit == upgrade
-base64 == upgrade
-warnings == upgrade
+streamlit == 1.29.0
+streamlit_extras==0.3.6
+toml==0.10.2
+beautifulsoup4 == 4.12.3
+pandas == 2.2.3
+pybase64 == 1.4.0
