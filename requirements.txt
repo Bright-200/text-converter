@@ -1,0 +1,3 @@
+streamlit == upgrade
+base64 == upgrade
+warnings == upgrade

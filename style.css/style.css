@@ -1,0 +1,22 @@
+MainMenu{
+    visibility: hidden;
+}
+header{
+    visibility: hidden;
+}
+#id{
+    padding: 100px;
+    background: blue;
+}
+.bok{
+    width: 104px;
+    height: 5px;
+    border: 4px solid rebeccapurple; 
+    top: 12px;   
+}
+.bok:hover{
+    transform: rotateX('90deg');    
+    
+    border: teal solid;
+    cursor: progress;
+}
