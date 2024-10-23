@@ -37,7 +37,7 @@ class word:
                                """)
      
         elif not output:           
-            book= st.markdown("<script>div.alert('Click the button please')</script>",unsafe_allow_html=True)
+            book= st.html("<script>alert('Click the button please')</script>")
             return book
         else:
             st.markdown("<script>alert('Click the button')</script>",unsafe_allow_html=True)
