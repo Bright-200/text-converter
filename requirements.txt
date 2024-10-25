@@ -1,6 +1,4 @@
 streamlit == 1.29.0
 streamlit-extras==0.5.0
-toml==0.10.2
-beautifulsoup4 == 4.12.3
 pandas == 2.2.3
 pybase64 == 1.4.0
