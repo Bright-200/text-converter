@@ -2,6 +2,7 @@ import warnings
 import streamlit as st
 import base64
 from pathlib import Path
+import urllib.parse
 from streamlit_extras.let_it_rain import rain
 # creating a encoding
 st.set_page_config ( page_icon=':💬:',layout='centered',initial_sidebar_state='expanded',page_title='WhatsApp Secret writer')
@@ -13,9 +14,12 @@ CSS=This_file/"style.css"/"style.css"
 with open(CSS)as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
-class word: 
+class word(): 
+    display=[]
     def run_items():
         rain(emoji='📖',font_size=20,falling_speed=5,animation_length='infinite')
+    
+    # code for the project
     st.header(':book: ENCODING AND DECODING WEBSITE',divider='green',help='This is also a secret way of writing messages to clients')
         
     def encoded(encoding='utf-8')->str:
@@ -28,21 +32,21 @@ class word:
         st.cache_resource()
         output=st.write(f"{string}",unsafe_allow_html=True)
         book=st.button('generate',on_click=output)
-  
+    
         if string:
             st.code(string,language='python')
-            return st.markdown("""***file is done click the copy button***
+            return st.markdown(
+                """***file is done click the copy button***
                  ***send it to the decode***
                           
                                """)
      
-        elif not output:           
-            book= st.markdown("<script>div.alert('Click the button please')</script>",unsafe_allow_html=True)
+        elif  output is None:           
+            book= st.markdown(f"<script>div.alert('Click the button please')</script>",unsafe_allow_html=True)
             return book
         else:
-            st.markdown("<script>alert('Click the button')</script>",unsafe_allow_html=True)
-        
-        
+            st.markdown(f"<script>alert('Click the button')</script>",unsafe_allow_html=True)
+            
     def decoded(encoding='utf-8')->str:
         st.subheader(":file_folder: DECODE MY WORD",divider='green')
         decode_name=st.text_input('Decoder Bar',placeholder='Past the decoded words only ',help='copy the encoded')
@@ -51,14 +55,24 @@ class word:
         book=st.button('Decode button')
         
         try:
-            if book:
-                return st.subheader(f"{display_decode.decode(encoding)}")
-               
+            if book:  
+                st.subheader(f"{display_decode.decode(encoding)}")
+            encoded_message=urllib.parse.quote(display_decode)
+            
+            # whatsapp link
+            whatsapp_link=f"https://wa.me/?text={encoded_message}"
+            
+            if st.button("Ready to chat on WhatsApp"):
+                 st.markdown(f"[Click here to chat on WhatsApp]({whatsapp_link})",unsafe_allow_html=True)
+                    
         except(ValueError):
             st.error('This is not a copied file from encode')
 
+        
+            
+    
+        
 # import functions from class
 word.run_items()
 word.encoded()
-
 word.decoded()
