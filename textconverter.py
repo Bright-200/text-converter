@@ -3,6 +3,7 @@ import streamlit as st
 import base64
 from pathlib import Path
 import urllib.parse
+import time
 from streamlit_extras.let_it_rain import rain
 # creating a encoding
 st.set_page_config ( page_icon=':💬:',layout='centered',initial_sidebar_state='expanded',page_title='WhatsApp Secret writer')
@@ -30,22 +31,26 @@ class word():
         string=base_display.decode(encoding)
         st.markdown("<div class='bok'></div> " ,unsafe_allow_html=True)
         st.cache_resource()
-        output=st.write(f"{string}",unsafe_allow_html=True)
-        book=st.button('generate',on_click=output)
+        
+        
+        
+        with st.spinner("Runing successfully"):
+            time.sleep(1.92) 
+            if st.button('generate'):
+                if string: 
+                    st.code(string,language='python',wrap_lines=True)
+                    encoded_message=urllib.parse.quote(string)
+            # whatsapp link
+                    if st.button("Ready to chat on WhatsApp"):
+                        st.html("<a style='text-decoration:None' href=`https://wa.me/?text=${encoded_message}`>Ⓜ️</a>")
+                        
+                    
+                else:
+                    return st.error("Please write something first",icon='❌')
+            
+        return None
+        
     
-        if string:
-            st.code(string,language='python')
-            return st.markdown(
-                """***file is done click the copy button***
-                 ***send it to the decode***
-                          
-                               """)
-     
-        elif  output is None:           
-            book= st.markdown(f"<script>div.alert('Click the button please')</script>",unsafe_allow_html=True)
-            return book
-        else:
-            st.markdown(f"<script>alert('Click the button')</script>",unsafe_allow_html=True)
             
     def decoded(encoding='utf-8')->str:
         st.subheader(":file_folder: DECODE MY WORD",divider='green')
@@ -57,18 +62,11 @@ class word():
         try:
             if book:  
                 st.subheader(f"{display_decode.decode(encoding)}")
-            encoded_message=urllib.parse.quote(display_decode)
             
-            # whatsapp link
-            whatsapp_link=f"https://wa.me/?text={encoded_message}"
-            
-            if st.button("Ready to chat on WhatsApp"):
-                 st.markdown(f"[Click here to chat on WhatsApp]({whatsapp_link})",unsafe_allow_html=True)
                     
         except(ValueError):
             st.error('This is not a copied file from encode')
 
-        
             
     
         
