@@ -39,16 +39,21 @@ class word():
             if st.button('generate'):
                 if string: 
                     st.code(string,language='python',wrap_lines=True)
-                    encoded_message=urllib.parse.quote(string)
-            # whatsapp link
-                    if st.button("Ready to chat on WhatsApp"):
-                        st.html("<a style='text-decoration:None' href=`https://wa.me/?text=${encoded_message}`>Ⓜ️</a>")
-                        
                     
+            # whatsapp link
+                        
+
                 else:
                     return st.error("Please write something first",icon='❌')
-            
-        return None
+            if st.button("Ready to chat on WhatsApp"):
+                        if string:
+                            encoded_message=urllib.parse.quote(string)
+                            whatsapp=f"https://wa.me/?text={encoded_message}"
+                            st.markdown(f"[Click here]({whatsapp})",unsafe_allow_html=True)                       
+                        else:
+                            st.error("You need to have an encoded word first :blue[Generate First] ")    
+                    
+    
         
     
             
@@ -57,15 +62,16 @@ class word():
         decode_name=st.text_input('Decoder Bar',placeholder='Past the decoded words only ',help='copy the encoded')
         text_decoder=decode_name.encode(encoding)
         display_decode=base64.b64decode(text_decoder + b'======')
-        book=st.button('Decode button')
         
         try:
-            if book:  
-                st.subheader(f"{display_decode.decode(encoding)}")
+          if st.button('Decode button'):  
+                if display_decode:
+                    st.subheader(f"{display_decode.decode(encoding)}")
+                else:
+                    st.error('Please copied file which is encoded and paste it ')
             
-                    
-        except(ValueError):
-            st.error('This is not a copied file from encode')
+        except Exception:
+            st.error('This is not encoded word')
 
             
     
